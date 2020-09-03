@@ -16,6 +16,8 @@ function Color({colors, handler, reset }) {
 
   return (
       <>
+          <div className="color">
+
 
           <h1>{`This is ${color}`}</h1>
           <h3>{`Is in't it beautiful`}</h3>
@@ -25,7 +27,7 @@ function Color({colors, handler, reset }) {
               goBack()
               reset()
           }}>Go Back!</Link>
-
+        </div>
     </>
   );
 }

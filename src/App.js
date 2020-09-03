@@ -8,19 +8,9 @@ import NewColor from './NewColor'
 function App() {
   // colors state
   const initialState = [
-    {
-        color: "red",
-        value: "#FF0000",
-    },
-    {
-        color: "blue",
-        value: "#0000FF",
-    },
-    {
-            color: "green",
-            value: "#00FF00",
-    },
-
+    {color: "red",value: "#FF0000",},
+    {color: "blue",value: "#0000FF",},
+    {color: "green",value: "#00FF00",}
     ]
   const [colors, setColors] = useState(initialState)
 
@@ -33,20 +23,27 @@ function App() {
   // get a refrence of the body element
   const body = useRef(document.body)
   // set a state with color white
-  const [color, setColor] = useState("#FFFFF")
-  // a handler to send down to the Color component to change the background color of the body, also changes the state
+  const [color, setColor] = useState("#FFFFFF")
+  // a handler to send down to the Color component to change the background color of the body
   const changeColor = (color) => {
     setColor(color)
-    body.current.style.backgroundColor = color;
   }
   // another hander to reset the state to white, activated when clicked on the back button
   const resetColor = () => {
-    setColor("#FFFFF")
+    setColor(color => color= "#FFFFFF")
+    body.current.style.backgroundColor = color
   }
-  // a use effect hook to reflect the state change on the view.
+  useEffect(() => {
+    setColors(colors => colors = JSON.parse(localStorage.getItem('colors')))
+  },[])
+  // a use effect hook to reflect the state change on the view. and to set the state to localStorage
   useEffect(() => {
     body.current.style.backgroundColor = color;
-  }, [color])
+    localStorage.setItem('colors',JSON.stringify(colors))
+  }, [color,colors])
+  // useEffect(() => {
+
+  // }, [colors])
   return (
     <>
     <Router>
